@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35723.152 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRazorTodo.AppHost", "AspNetRazorTodo.AppHost\AspNetRazorTodo.AppHost.csproj", "{72867F03-3129-47E0-A3BB-FD323933D861}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetRazorTodo.WebApp", "AspNetRazorTodo.WebApp\AspNetRazorTodo.WebApp.csproj", "{DDDD0E7D-2396-DEB9-69C5-300232033174}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72867F03-3129-47E0-A3BB-FD323933D861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72867F03-3129-47E0-A3BB-FD323933D861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72867F03-3129-47E0-A3BB-FD323933D861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72867F03-3129-47E0-A3BB-FD323933D861}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDDD0E7D-2396-DEB9-69C5-300232033174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDDD0E7D-2396-DEB9-69C5-300232033174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDDD0E7D-2396-DEB9-69C5-300232033174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDDD0E7D-2396-DEB9-69C5-300232033174}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {452EDC71-2BEA-4FB4-A728-6C82A9A4FD4C}
+	EndGlobalSection
+EndGlobal

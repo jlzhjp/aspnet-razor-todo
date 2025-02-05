@@ -1,0 +1,58 @@
+﻿@page
+@using AspNetRazorTodo.WebApp.Models
+@model IndexModel
+@{
+  ViewData["Title"] = "Home page";
+}
+
+<header>
+  <nav class="block w-full max-w-screen-lg px-4 py-2 mx-auto bg-white shadow-md rounded-md lg:px-8 lg:py-3 mt-10">
+    <div class="container flex flex-wrap items-center justify-between mx-auto text-slate-800">
+      <a href="#" class="mr-4 block cursor-pointer py-1.5 text-base text-slate-800 font-semibold">
+        Todo List
+      </a>
+      <div class="block">
+        <a asp-page="/Todos/Create" class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none cursor-pointer" type="button">
+          Add
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main role="main">
+  @foreach (var todo in Model.Todos)
+  {
+    <label class="border-rounded flex flex-row items-center rounded shadow py-4 px-8 max-w-screen-lg mx-auto my-4">
+      <div class="inline-flex items-center">
+        <label class="relative flex cursor-pointer flex-row items-center">
+          <input type="checkbox" checked class="h-5 w-5 border-slate-300 peer cursor-pointer appearance-none rounded border shadow transition-all checked:bg-slate-800 checked:border-slate-800 hover:shadow-md" id="@todo.Id"/>
+          <span class="text-white -translate-x-1/2 -translate-y-1/2 pointer-events-none absolute left-1/2 top-1/2 transform opacity-0 peer-checked:opacity-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor" stroke="currentColor" stroke-width="1">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          </span>
+        </label>
+      </div>
+      
+      <span class="grow mx-4">
+        @todo.Title
+      </span>
+
+      <button class="rounded-md border border-transparent p-2.5 text-center text-sm transition-all text-slate-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none cursor-pointer mx-1" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+        </svg>
+      </button>
+
+      <form class="w-fit h-fit" method="post">
+        <input type="hidden" asp-for="TodoIdToDelete" value="@todo.Id" />
+        <button class="rounded-md border border-transparent p-2.5 text-center text-sm transition-all text-slate-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none cursor-pointer mx-1" type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </form>
+    </label>
+  }
+</main>
