@@ -11,9 +11,9 @@ public class Todo
         IsCompleted = isCompleted;
     }
 
-    public ObjectId Id { get; private set; } = ObjectId.GenerateNewId();
+    public ObjectId Id { get; set; } = ObjectId.GenerateNewId();
 
-    public string Title { get; private set; } = null!;
+    public string Title { get; set; } = null!;
 
-    public bool IsCompleted { get; private set; }
+    public bool IsCompleted { get; set; }
 }

@@ -7,8 +7,8 @@ public class ApplicationStartupService(ITodoRepository todoRepository) : IHosted
 {
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        todoRepository.Save(new Todo("Study ASP.NET", false));
-        todoRepository.Save(new Todo("Do Laundry", false));
+        todoRepository.SaveAsync(new Todo("Study ASP.NET", false));
+        todoRepository.SaveAsync(new Todo("Do Laundry", false));
         return Task.CompletedTask;
     }
 

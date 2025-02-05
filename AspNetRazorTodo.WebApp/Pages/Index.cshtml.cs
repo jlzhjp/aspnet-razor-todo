@@ -2,6 +2,7 @@ using AspNetRazorTodo.WebApp.Models;
 using AspNetRazorTodo.WebApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.JSInterop.Implementation;
 using MongoDB.Bson;
 
 namespace AspNetRazorTodo.WebApp.Pages;
@@ -25,9 +26,7 @@ public class IndexModel(ILogger<IndexModel> logger, ITodoRepository todoReposito
             return BadRequest();
         }
 
-        var parseSuccess = ObjectId.TryParse(TodoIdToDelete, out var id);
-
-        if (!parseSuccess)
+        if (!ObjectId.TryParse(TodoIdToDelete, out var id))
         {
             logger.LogError("`TodoIdToDelete` not a valid `ObjectId`");
             return BadRequest();
