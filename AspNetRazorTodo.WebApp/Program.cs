@@ -1,14 +1,17 @@
+using AspNetRazorTodo.WebApp.Identity;
 using AspNetRazorTodo.WebApp.Repositories;
-using AspNetRazorTodo.WebApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddMongoDBClient(connectionName: "tododb");
 
 // Add services to the container.
+builder.Services
+    .AddDefaultIdentity<SimpleTodoUser>()
+    .AddUserStore<SimpleTodoUserStore>();
+
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton<ITodoRepository, TodoRepository>();
-builder.Services.AddHostedService<ApplicationStartupService>();
 
 var app = builder.Build();
 
@@ -24,11 +27,11 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();
 
-app.MapRazorPages()
-    .WithStaticAssets();
+app.MapRazorPages().WithStaticAssets();
 
 app.Run();

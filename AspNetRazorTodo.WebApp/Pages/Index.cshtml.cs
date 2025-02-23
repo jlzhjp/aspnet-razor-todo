@@ -1,13 +1,19 @@
+using AspNetRazorTodo.WebApp.Identity;
 using AspNetRazorTodo.WebApp.Models;
 using AspNetRazorTodo.WebApp.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.JSInterop.Implementation;
 using MongoDB.Bson;
 
 namespace AspNetRazorTodo.WebApp.Pages;
 
-public class IndexModel(ILogger<IndexModel> logger, ITodoRepository todoRepository) : PageModel
+[Authorize]
+public class IndexModel(
+    ILogger<IndexModel> logger,
+    ITodoRepository todoRepository,
+    UserManager<SimpleTodoUser> userManager) : PageModel
 {
     [BindProperty]
     public string? TodoIdToDelete { get; set; }
@@ -15,7 +21,8 @@ public class IndexModel(ILogger<IndexModel> logger, ITodoRepository todoReposito
     
     public async Task OnGetAsync()
     {
-        Todos = await todoRepository.FindTodosAsync();
+        var user = await userManager.GetUserAsync(User) ?? throw new UnauthorizedAccessException();
+        Todos = await todoRepository.FindTodosByUserIdAsync(user.Id);
     }
 
     public async Task<IActionResult> OnPostAsync()

@@ -12,14 +12,10 @@
 
     <ItemGroup>
         <PackageReference Include="Aspire.MongoDB.Driver" Version="9.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.2" />
     </ItemGroup>
 
     <ItemGroup>
-        <UpToDateCheckBuilt Include="Tailwind\site.css" Set="Css" />
+      <Folder Include="Services\" />
     </ItemGroup>
-
-    <Target Name="Tailwind" BeforeTargets="Build">
-        <Message Text="Building Tailwind" />
-        <Exec Command="bun tailwind:build" />
-    </Target>
 </Project>

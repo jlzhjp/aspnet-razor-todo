@@ -7,32 +7,36 @@ public class TodoRepository(IMongoDatabase database) : ITodoRepository
 {
     private readonly IMongoCollection<Todo> _todos = database.GetCollection<Todo>("todos");
 
-    public async Task<Todo?> FindTodoByIdAsync(ObjectId id)
+    public async Task<Todo?> FindTodoByIdAsync(ObjectId id, CancellationToken cancellationToken)
     {
         var cursor = await _todos.FindAsync(
-            Builders<Todo>.Filter.Eq(todo => todo.Id, id));
-        return await cursor.SingleOrDefaultAsync();
+            filter: todo => todo.Id == id,
+            cancellationToken: cancellationToken);
+        return await cursor.SingleOrDefaultAsync(cancellationToken);
     }
 
-    public async Task<long> DeleteAsync(ObjectId id)
+    public async Task<long> DeleteAsync(ObjectId id, CancellationToken cancellationToken)
     {
         var result = await _todos.DeleteOneAsync(
-            Builders<Todo>.Filter.Eq(todo => todo.Id, id));
+            filter: todo => todo.Id == id,
+            cancellationToken: cancellationToken);
         return result.DeletedCount;
     }
 
-    public async Task<List<Todo>> FindTodosAsync()
+    public async Task<List<Todo>> FindTodosByUserIdAsync(ObjectId userId, CancellationToken cancellationToken)
     {
         var cursor = await _todos.FindAsync(
-            Builders<Todo>.Filter.Empty);
-        return await cursor.ToListAsync();
+            filter: todo => todo.UserId == userId,
+            cancellationToken: cancellationToken);
+        return await cursor.ToListAsync(cancellationToken);
     }
 
-    public async Task SaveAsync(Todo todo)
+    public async Task SaveAsync(Todo todo, CancellationToken cancellationToken)
     {
         await _todos.ReplaceOneAsync(
-            Builders<Todo>.Filter.Eq(x => x.Id, todo.Id),
-            todo,
-            new ReplaceOptions { IsUpsert = true });
+            filter: x => x.Id == todo.Id,
+            replacement: todo,
+            options: new ReplaceOptions { IsUpsert = true },
+            cancellationToken: cancellationToken);
     }
 }
